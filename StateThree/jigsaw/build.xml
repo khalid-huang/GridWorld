@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project default="run" name="Project Argon" basedir=".">
+     <description>A simple Java project</description>
+	 
+	<property name="srcDir" location="."/>
+	<property name="buildDir" location="build"/>
+	<!--	<property name="srcDir" location="."/>-->
+    <property name="distDir" location="dist"/>
+	<property name="main-class" value="Runners.RunnerDemo" />
+	<property name="main-class1" value="Runners.RunnerPart1" />
+	<property name="main-class2" value="Runners.RunnerPart2" />
+ 
+    <target name="init">
+       <tstamp/>
+       <mkdir dir="${buildDir}"/>
+       <mkdir dir="${distDir}"/>
+    </target>
+    <target name="compile" depends="init">
+		<javac srcdir="${srcDir}" destdir="${buildDir}"/>
+    </target>
+	
+	<target name="run" depends="compile">
+		<java fork="true" classpath="${buildDir}" classname="${main-class}" />
+	</target>
+
+	<target name="run1" depends="compile">
+		<java fork="true" classpath="${buildDir}" classname="${main-class1}" />
+	</target>
+
+	<target name="run2" depends="compile">
+		<java fork="true" classpath="${buildDir}" classname="${main-class2}" />
+	</target>
+
+
+	 
+    <target name="dist" depends="compile">
+       <jar destfile="${distDir}/package-${DSTAMP}.jar" basedir="${buildDir}">
+         <manifest>
+           <attribute name="Built-By" value="${user.name}"/>
+           <attribute name="Main-Class" value="package.Main"/>
+         </manifest>
+       </jar>
+       <jar destfile="${distDir}/package-src-${DSTAMP}.jar" basedir="${srcDir}"/>
+   </target>
+   
+	
+
+    <target name="clean">
+      <delete dir="${buildDir}"/>
+	  <delete dir="${distDir}"/>
+	  <delete file="trash"/>
+	  <delete file="result.txt"/>
+    </target>
+</project>

@@ -1,0 +1,34 @@
+package info.gridworld.grid;
+
+import java.util.LinkList;
+
+class OccupantIncol 
+{
+	private Object occupant;
+	private int col;
+
+	public OccupantIncol(occupant, col) {
+		this.occupant = occupant;
+		this.col = col;
+	}
+
+	public int getCol() {
+		return this.col;
+	}
+
+	public Object getOccupant() {
+		return this.occupant;
+	}
+
+	public void setOccupant(newOccupant) {
+		this.occupant = newOccupant;
+	}
+}
+
+public class SparseBoundedGrid<E> extends AbstractGrid<E>
+{
+	private LinkedList<OccupantIncol>; //the linklist storting the grid element;
+	
+
+
+

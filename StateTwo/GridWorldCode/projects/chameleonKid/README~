@@ -1,0 +1,2 @@
+编译的指令为
+javac -classpath .:./../:./../../grid* **(是引用了Mypackage)

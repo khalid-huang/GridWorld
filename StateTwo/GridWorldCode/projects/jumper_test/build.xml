@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project default="junit" name="Project Argon" basedir=".">
+     <description>A simple Java project</description>
+	 
+	<property name="srcDir" location="."/>
+	<property name="buildDir" location="build"/>
+    <property name="distDir" location="dist"/>
+ 
+	<path id="tcls">
+		<pathelement path="./build" />
+		<pathelement path="."/>
+		<pathelement path="./junit-4.9.jar" />
+		<pathelement path="./../../gridworld.jar" />
+	</path>
+
+    <target name="init">
+       <tstamp/>
+       <mkdir dir="${buildDir}"/>
+       <mkdir dir="${distDir}"/>
+    </target>
+    <target name="compile" depends="init">
+		<javac classpath=".:./../../gridworld.jar:./junit-4.9.jar" srcdir="${srcDir}" destdir="${buildDir}"/>
+    </target>
+	
+	<target name="junit" depends="compile">
+		<junit printsummary="yes">
+			<classpath>
+				<path refid="tcls"/>
+			</classpath>
+			<batchtest fork="yes">
+				<fileset dir="." includes="*Test.java" />
+			</batchtest>
+		</junit>
+	</target>
+
+	 
+    <target name="dist" depends="compile">
+       <jar destfile="${distDir}/package-${DSTAMP}.jar" basedir="${buildDir}">
+         <manifest>
+           <attribute name="Built-By" value="${user.name}"/>
+           <attribute name="Main-Class" value="package.Main"/>
+         </manifest>
+       </jar>
+       <jar destfile="${distDir}/package-src-${DSTAMP}.jar" basedir="${srcDir}"/>
+   </target>
+   
+	
+
+    <target name="clean">
+      <delete dir="${buildDir}"/>
+	  <delete dir="${distDir}"/>
+    </target>
+</project>
