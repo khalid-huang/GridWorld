@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project default="compile" name="Porject Argon" basedir=".">
+	<property name="srcDir" location="." />
+	<property name="buildDir" location="." />
+
+	<target name="compile">
+		<javac srcdir="${srcDir}" destdir="${buildDir}"/>
+		<java fork="true" classname="VisualCal"/>
+	</target>
+</project>
+	
+		
